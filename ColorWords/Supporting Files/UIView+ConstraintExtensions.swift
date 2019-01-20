@@ -6,9 +6,10 @@
 //  Copyright © 2019 Jordan Dumlao. All rights reserved.
 //
 //  Extensions to easily add common cases of constraints
-//  This can help reduce bloated code required to programmatically
-//  Constrain views
+//  This can help reduce bloated code required to
+//  Programmatically constrain views
 //
+
 import UIKit
 
 extension UIView {
@@ -85,9 +86,10 @@ extension UIView {
     self.removeConstraints(self.constraints)
   }
   
-  public convenience init(withBackgroundColor color: UIColor) {
+  public convenience init(withBackgroundColor color: UIColor, autoLayout: Bool) {
     self.init()
     self.backgroundColor = color
+    self.translatesAutoresizingMaskIntoConstraints = !autoLayout
   }
 }
 

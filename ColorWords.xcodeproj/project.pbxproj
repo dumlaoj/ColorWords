@@ -13,6 +13,7 @@
 		173EF93521F3B7CB00CF4B32 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173EF93421F3B7CB00CF4B32 /* GameViewController.swift */; };
 		175102F821F3BA49009DF3DD /* TimedProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175102F621F3BA49009DF3DD /* TimedProgressView.swift */; };
 		175102F921F3BA49009DF3DD /* UIView+ConstraintExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175102F721F3BA49009DF3DD /* UIView+ConstraintExtensions.swift */; };
+		175102FB21F3BBCA009DF3DD /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175102FA21F3BBCA009DF3DD /* GameView.swift */; };
 		7BCBEFC276EBE802AD197BFA /* Pods_ColorWords.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF4D4677B56A2FA280022CA8 /* Pods_ColorWords.framework */; };
 /* End PBXBuildFile section */
 
@@ -25,6 +26,7 @@
 		173EF93421F3B7CB00CF4B32 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		175102F621F3BA49009DF3DD /* TimedProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimedProgressView.swift; sourceTree = "<group>"; };
 		175102F721F3BA49009DF3DD /* UIView+ConstraintExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+ConstraintExtensions.swift"; sourceTree = "<group>"; };
+		175102FA21F3BBCA009DF3DD /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		D1AF1073288276C166E0451E /* Pods-ColorWords.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ColorWords.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ColorWords/Pods-ColorWords.debug.xcconfig"; sourceTree = "<group>"; };
 		DF4D4677B56A2FA280022CA8 /* Pods_ColorWords.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ColorWords.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EED722AC08FA2B8D17A6D918 /* Pods-ColorWords.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ColorWords.release.xcconfig"; path = "Pods/Target Support Files/Pods-ColorWords/Pods-ColorWords.release.xcconfig"; sourceTree = "<group>"; };
@@ -73,10 +75,11 @@
 			isa = PBXGroup;
 			children = (
 				173EF93621F3B7DB00CF4B32 /* Supporting Files */,
-				173EF92921F3B61C00CF4B32 /* Assets.xcassets */,
-				173EF92E21F3B61C00CF4B32 /* Info.plist */,
+				175102FA21F3BBCA009DF3DD /* GameView.swift */,
 				173EF93421F3B7CB00CF4B32 /* GameViewController.swift */,
 				175102F621F3BA49009DF3DD /* TimedProgressView.swift */,
+				173EF92921F3B61C00CF4B32 /* Assets.xcassets */,
+				173EF92E21F3B61C00CF4B32 /* Info.plist */,
 			);
 			path = ColorWords;
 			sourceTree = "<group>";
@@ -214,6 +217,7 @@
 				173EF93521F3B7CB00CF4B32 /* GameViewController.swift in Sources */,
 				173EF92321F3B61900CF4B32 /* AppDelegate.swift in Sources */,
 				175102F921F3BA49009DF3DD /* UIView+ConstraintExtensions.swift in Sources */,
+				175102FB21F3BBCA009DF3DD /* GameView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

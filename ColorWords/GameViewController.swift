@@ -7,7 +7,39 @@
 //
 
 import UIKit
+import ChameleonFramework
 
 class GameViewController: UIViewController {
 
+  var gameView: GameView {
+    return view as! GameView
+  }
+  
+  override func loadView() {
+    super.loadView()
+    let gameView = GameView(frame: UIScreen.main.bounds)
+    gameView.delegate = self
+    view = gameView
+  }
+}
+
+//MARK: View Lifecycle
+extension GameViewController {
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    
+    
+    
+  }
+}
+
+extension GameViewController: GameViewDelegate {
+  func gameView(_ gameView: GameView, wasSwipedInDirection swipe: UISwipeGestureRecognizer.Direction) {
+    //TODO: Do something when swiped
+    switch swipe {
+    case .right: break
+    case .left: break
+    default: break
+    }
+  }
 }
