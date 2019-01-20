@@ -27,9 +27,7 @@ class GameViewController: UIViewController {
 extension GameViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
-    
-    
-    
+
   }
 }
 
@@ -40,6 +38,20 @@ extension GameViewController: GameViewDelegate {
     case .right: break
     case .left: break
     default: break
+    }
+  }
+}
+
+extension ColorWord {
+  var color: UIColor {
+    switch self.colorFromIndex {
+    case .blue: return .flatBlue
+    case .green: return .flatGreen
+    case .red: return .flatRed
+    case .purple: return .flatPurple
+    case .yellow: return .flatYellow
+    case .orange: return .flatOrange
+    case .pink: return .flatPink
     }
   }
 }

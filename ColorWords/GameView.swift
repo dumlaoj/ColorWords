@@ -18,12 +18,12 @@ class GameView: UIView {
   weak var delegate: GameViewDelegate?
   
   private var topContainerView: UIView = {
-    let view = UIView(withBackgroundColor: .flatGray, autoLayout: true)
+    let view = UIView(withBackgroundColor: .white, autoLayout: true)
     return view
   }()
   
   private var bottomContainerView: UIView = {
-    let view = UIView(withBackgroundColor: .flatGrayDark, autoLayout: true)
+    let view = UIView(withBackgroundColor: .white, autoLayout: true)
     return view
   }()
   
@@ -33,6 +33,7 @@ class GameView: UIView {
     label.textAlignment = .center
     label.textColor = .flatBlack
     label.font = UIFont.boldSystemFont(ofSize: 100)
+    label.adjustsFontSizeToFitWidth = true
     return label
   }()
   
@@ -64,7 +65,8 @@ class GameView: UIView {
     bottomContainerView.constrain(leading: leadingAnchor, top: nil, trailing: trailingAnchor, bottom: bottomAnchor, withInset: .zero)
     
     addSubview(colorWordLabel)
-    colorWordLabel.centerInSuperView()
+    colorWordLabel.allignVerticallyTo(self, 0)
+    colorWordLabel.constrain(leading: leadingAnchor, top: nil, trailing: trailingAnchor, bottom: nil, withInset: UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10))
     
   }
   
@@ -90,6 +92,5 @@ class GameView: UIView {
       break
     }
   }
-  
-  
 }
+
