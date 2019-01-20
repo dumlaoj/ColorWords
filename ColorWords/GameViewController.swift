@@ -35,7 +35,7 @@ extension GameViewController: GameViewDelegate {
   func gameView(_ gameView: GameView, wasSwipedInDirection swipe: UISwipeGestureRecognizer.Direction) {
     //TODO: Do something when swiped
     switch swipe {
-    case .right: break
+    case .right: gameView.colorWord = ColorWord()
     case .left: break
     default: break
     }

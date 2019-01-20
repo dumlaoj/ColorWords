@@ -16,6 +16,15 @@ protocol GameViewDelegate: class {
 class GameView: UIView {
   
   weak var delegate: GameViewDelegate?
+  var colorWord: ColorWord {
+    get {
+      return ColorWord()
+    }
+    set {
+      colorWordLabel.text = newValue.name.rawValue.uppercased()
+      colorWordLabel.textColor = newValue.color
+    }
+  }
   
   private var topContainerView: UIView = {
     let view = UIView(withBackgroundColor: .white, autoLayout: true)
