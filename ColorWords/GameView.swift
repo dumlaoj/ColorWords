@@ -41,7 +41,7 @@ class GameView: UIView {
     label.text = "COLOR"
     label.textAlignment = .center
     label.textColor = .flatBlack
-    label.font = UIFont.boldSystemFont(ofSize: 100)
+    label.font = UIFont.boldSystemFont(ofSize: 75)
     label.adjustsFontSizeToFitWidth = true
     return label
   }()
@@ -75,18 +75,18 @@ class GameView: UIView {
     
     addSubview(colorWordLabel)
     colorWordLabel.allignVerticallyTo(self, 0)
-    colorWordLabel.constrain(leading: leadingAnchor, top: nil, trailing: trailingAnchor, bottom: nil, withInset: UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10))
+    colorWordLabel.constrain(leading: leadingAnchor, top: nil, trailing: trailingAnchor, bottom: nil, withInset: UIEdgeInsets(top: 0, left: 30, bottom: 0, right: 30))
     
   }
   
   private func addSwipeGestures() {
     rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe(_:)))
     rightSwipe.direction = .right
-    bottomContainerView.addGestureRecognizer(rightSwipe)
+    addGestureRecognizer(rightSwipe)
     
     leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe(_:)))
     leftSwipe.direction = .left
-    bottomContainerView.addGestureRecognizer(leftSwipe)
+    addGestureRecognizer(leftSwipe)
   }
   
   @objc private func handleSwipe(_ sender: UISwipeGestureRecognizer) {

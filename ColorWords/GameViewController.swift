@@ -18,6 +18,7 @@ class GameViewController: UIViewController {
   override func loadView() {
     super.loadView()
     let gameView = GameView(frame: UIScreen.main.bounds)
+    gameView.colorWord = ColorWord()
     gameView.delegate = self
     view = gameView
   }
@@ -35,7 +36,8 @@ extension GameViewController: GameViewDelegate {
   func gameView(_ gameView: GameView, wasSwipedInDirection swipe: UISwipeGestureRecognizer.Direction) {
     //TODO: Do something when swiped
     switch swipe {
-    case .right: gameView.colorWord = ColorWord()
+    case .right:
+      gameView.colorWord = ColorWord()
     case .left: break
     default: break
     }
