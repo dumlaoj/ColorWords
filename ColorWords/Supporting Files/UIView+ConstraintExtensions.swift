@@ -2,94 +2,93 @@
 //  UIView+ConstraintExtension.swift
 //
 //  Created by Jordan Dumlao on 1/7/19.
-//  Edited on 1/19/19
+//  Edited on 1/21/19
 //  Copyright © 2019 Jordan Dumlao. All rights reserved.
 //
 //  Extensions to easily add common cases of constraints
-//  This can help reduce bloated code required to
-//  Programmatically constrain views
+//  This can help reduce bloated code required to programmatically
+//  Constrain views
 //
-
 import UIKit
 
 extension UIView {
   
-  func constrain(leading: NSLayoutXAxisAnchor?, top: NSLayoutYAxisAnchor?, trailing: NSLayoutXAxisAnchor?, bottom: NSLayoutYAxisAnchor?, withInset inset: UIEdgeInsets) {
-    if let lead = leading { self.leadingAnchor.constraint(equalTo: lead, constant: inset.left).isActive = true }
-    if let top = top { self.topAnchor.constraint(equalTo: top, constant: inset.top).isActive = true }
-    if let trail = trailing { self.trailingAnchor.constraint(equalTo: trail, constant: -inset.right).isActive = true }
-    if let bot = bottom { self.bottomAnchor.constraint(equalTo: bot, constant: -inset.bottom).isActive = true }
+  func constrain(toLeading leading: NSLayoutXAxisAnchor?, top: NSLayoutYAxisAnchor?, trailing: NSLayoutXAxisAnchor?, bottom: NSLayoutYAxisAnchor?, withPadding padding: UIEdgeInsets) {
+    if let lead = leading { self.leadingAnchor.constraint(equalTo: lead, constant: padding.left).isActive = true }
+    if let top = top { self.topAnchor.constraint(equalTo: top, constant: padding.top).isActive = true }
+    if let trail = trailing { self.trailingAnchor.constraint(equalTo: trail, constant: -padding.right).isActive = true }
+    if let bot = bottom { self.bottomAnchor.constraint(equalTo: bot, constant: -padding.bottom).isActive = true }
   }
   
-  func constrain(to view: UIView, withInset inset: UIEdgeInsets) {
-    constrain(leading: view.leadingAnchor, top: view.topAnchor, trailing: view.trailingAnchor, bottom: view.bottomAnchor, withInset: inset)
+  func constrain(to view: UIView, withPadding padding: UIEdgeInsets) {
+    constrain(toLeading: view.leadingAnchor, top: view.topAnchor, trailing: view.trailingAnchor, bottom: view.bottomAnchor, withPadding: padding)
   }
   
   func fillSuperview() {
     guard let sView = self.superview else { return }
-    constrain(to: sView, withInset: .zero)
+    constrain(to: sView, withPadding: .zero)
   }
   
-  func fillSuperView(_ inset: UIEdgeInsets) {
+  func fillSuperView(withPadding padding: UIEdgeInsets) {
     guard let sView = self.superview else { return }
-    constrain(to: sView, withInset: inset)
+    constrain(to: sView, withPadding: padding)
   }
   
-  func connectBottom(toTopOf topView: UIView, withPadding padding: CGFloat) {
+  func constrain(bottomToTopOf topView: UIView, withPadding padding: CGFloat) {
     guard self.superview == topView.superview else { fatalError("Both views must be in the same superview")}
     self.bottomAnchor.constraint(equalTo: topView.topAnchor, constant: padding).isActive = true
   }
   
-  func connectTop(toBottomOf botView: UIView, withPadding padding: CGFloat) {
+  func constrain(topToBottomOf botView: UIView, withPadding padding: CGFloat) {
     guard self.superview == botView.superview else { fatalError("Both views must be in the same superview")}
     self.bottomAnchor.constraint(equalTo: botView.topAnchor, constant: padding).isActive = true
   }
   
-  func connectLeading(toTrailingOf traillingView: UIView, withPadding padding: CGFloat) {
+  func constrain(leadingToTrailingOf traillingView: UIView, withPadding padding: CGFloat) {
     guard self.superview == traillingView.superview else { fatalError("Both views must be in the same superview")}
     self.bottomAnchor.constraint(equalTo: traillingView.topAnchor, constant: padding).isActive = true
   }
   
-  func connectTrailing(toLeadingOf leadingView: UIView, withPadding padding: CGFloat) {
+  func constrain(trailingToLeadingOf leadingView: UIView, withPadding padding: CGFloat) {
     guard self.superview == leadingView.superview else { fatalError("Both views must be in the same superview")}
     self.bottomAnchor.constraint(equalTo: leadingView.topAnchor, constant: padding).isActive = true
   }
   
-  func anchorSize(_ size: CGSize) {
-    self.setHeightTo(size.height)
-    self.setWidthTo(size.width)
+  func constrain(withSize size: CGSize) {
+    self.constrain(withHeight: size.height)
+    self.constrain(withWidth: size.width)
   }
   
-  func setHeightTo(_ height: CGFloat) {
+  func constrain(withHeight height: CGFloat) {
     self.heightAnchor.constraint(equalToConstant: height).isActive = true
   }
   
-  func setWidthTo(_ width: CGFloat) {
+  func constrain(withWidth width: CGFloat) {
     self.widthAnchor.constraint(equalToConstant: width).isActive = true
   }
   
-  func allignVerticallyTo(_ view: UIView, _ constant: CGFloat) {
+  func allignVertically(to view: UIView, _ constant: CGFloat) {
     self.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: constant).isActive = true
   }
   
-  func allignHorizontallyTo(_ view: UIView, _ constant: CGFloat) {
+  func allignHorizontally(to view: UIView, _ constant: CGFloat) {
     self.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: constant).isActive = true
   }
   
   func centerInSuperView() {
     guard let sView = superview else { fatalError("No Superview") }
-    allignHorizontallyTo(sView, 0)
-    allignVerticallyTo(sView, 0)
+    allignHorizontally(to: sView, 0)
+    allignVertically(to: sView, 0)
   }
   
   func removeAllConstraints() {
     self.removeConstraints(self.constraints)
   }
   
-  public convenience init(withBackgroundColor color: UIColor, autoLayout: Bool) {
+  public convenience init(withBackgroundColor color: UIColor, autolayout: Bool) {
     self.init()
     self.backgroundColor = color
-    self.translatesAutoresizingMaskIntoConstraints = !autoLayout
+    self.translatesAutoresizingMaskIntoConstraints = !autolayout
   }
 }
 

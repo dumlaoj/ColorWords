@@ -21,22 +21,12 @@ struct ColorWord {
     self.nameIndex = count.randomNumber
     self.colorIndex = count.randomNumber
   }
+  
 }
-
 
 extension Int {
   var randomNumber: Int {
     let absNumber = abs(self)
     return Int(arc4random_uniform(UInt32(absNumber)))
   }
-}
-
-enum ColorName: String, CaseIterable {
-  case blue
-  case green
-  case red
-  case purple
-  case yellow
-  case orange
-  case pink
 }

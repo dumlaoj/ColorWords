@@ -11,9 +11,47 @@ import ChameleonFramework
 
 class GameViewController: UIViewController {
 
-  var gameView: GameView {
-    return view as! GameView
+  var gameView: GameView {  return view as! GameView }
+  var colorWord: ColorWord = ColorWord() {
+    didSet {
+      gameView.colorWord = colorWord
+      print(colorWord.colorIndex)
+      print(colorWord.nameIndex)
+      print("\n")
+    }
   }
+  
+  var points: Int = 0 {
+    didSet {
+      gameView.pointsLabel.text = "\(points)"
+    }
+  }
+  
+  //MARK: TIMER VARIABLES
+  var timer: Timer = Timer()
+  let maxTime: CGFloat = 5
+  var percentTimeCompete: CGFloat = 5 {
+    didSet {
+      if percentTimeCompete == 5 {
+        gameView.timedProgressView.setProgress(1.0, animated: false)
+        return
+      }
+      gameView.timedProgressView.setProgress(Float(timeRemoved), animated: true)
+      if percentTimeCompete <= 0 {
+        timer.invalidate()
+        print("timer stopped")
+      }
+    }
+  }
+  var timeRemoved: CGFloat { return percentTimeCompete / maxTime }
+  
+  /*
+   CA Display Link
+   */
+//  var startValue = 0
+//  let endValue = 100
+//  let displayLink = CADisplayLink(target: self, selector: #selector(updatePoints))
+//  displayLink.add(to: .main, forMode: .default)
   
   override func loadView() {
     super.loadView()
@@ -28,32 +66,51 @@ class GameViewController: UIViewController {
 extension GameViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
-
+    configureTimer()
   }
 }
 
 extension GameViewController: GameViewDelegate {
   func gameView(_ gameView: GameView, wasSwipedInDirection swipe: UISwipeGestureRecognizer.Direction) {
-    //TODO: Do something when swiped
     switch swipe {
     case .right:
-      gameView.colorWord = ColorWord()
-    case .left: break
+      guard colorWord.isCorrect else { timer.invalidate(); print("GAME OVER"); return }
+      points += 1
+      colorWord = ColorWord()
+      restartTimer()
+    case .left:
+      guard !colorWord.isCorrect else { timer.invalidate(); print("GAME OVER"); return }
+      points += 1
+      colorWord = ColorWord()
+      restartTimer()
     default: break
     }
   }
 }
 
-extension ColorWord {
-  var color: UIColor {
-    switch self.colorFromIndex {
-    case .blue: return .flatBlue
-    case .green: return .flatGreen
-    case .red: return .flatRed
-    case .purple: return .flatPurple
-    case .yellow: return .flatYellow
-    case .orange: return .flatOrange
-    case .pink: return .flatPink
-    }
+
+//CA Display Link
+extension GameViewController {
+//
+//  @objc func updatePoints() {
+//    gameView.pointsLabel.text = "\(startValue)"
+//    startValue += 1
+//  }
+}
+
+//MARK: TIMER
+extension GameViewController {
+  
+  private func configureTimer() {
+    timer = Timer.scheduledTimer(withTimeInterval: 0.001, repeats: true, block: { [weak self] in
+      print($0.timeInterval)
+      self?.percentTimeCompete -= CGFloat(0.001)
+    })
+  }
+  
+  private func restartTimer() {
+    timer.invalidate()
+    percentTimeCompete = maxTime
+    configureTimer()
   }
 }
