@@ -52,6 +52,15 @@ class GameViewController: UIViewController {
 //  let endValue = 100
 //  let displayLink = CADisplayLink(target: self, selector: #selector(updatePoints))
 //  displayLink.add(to: .main, forMode: .default)
+  private func startNewGame() {
+    points = 0
+    colorWord = ColorWord()
+    restartTimer()
+  }
+}
+
+//MARK: View Lifecycle
+extension GameViewController {
   
   override func loadView() {
     super.loadView()
@@ -60,26 +69,27 @@ class GameViewController: UIViewController {
     gameView.delegate = self
     view = gameView
   }
-}
-
-//MARK: View Lifecycle
-extension GameViewController {
+  
   override func viewDidLoad() {
     super.viewDidLoad()
-    configureTimer()
+    startNewGame()
   }
 }
 
 extension GameViewController: GameViewDelegate {
+  func gameView(_ gameView: GameView, didStartNewGame: Bool) {
+    startNewGame()
+  }
+  
   func gameView(_ gameView: GameView, wasSwipedInDirection swipe: UISwipeGestureRecognizer.Direction) {
     switch swipe {
     case .right:
-      guard colorWord.isCorrect else { timer.invalidate(); print("GAME OVER"); return }
+      guard colorWord.isCorrect else { timer.invalidate(); print("GAME OVER"); gameView.presentGameOverView(); return }
       points += 1
       colorWord = ColorWord()
       restartTimer()
     case .left:
-      guard !colorWord.isCorrect else { timer.invalidate(); print("GAME OVER"); return }
+      guard !colorWord.isCorrect else { timer.invalidate(); print("GAME OVER"); gameView.presentGameOverView(); return }
       points += 1
       colorWord = ColorWord()
       restartTimer()

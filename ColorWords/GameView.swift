@@ -11,6 +11,7 @@ import ChameleonFramework
 
 protocol GameViewDelegate: class {
   func gameView(_ gameView: GameView, wasSwipedInDirection swipe: UISwipeGestureRecognizer.Direction)
+  func gameView(_ gameView: GameView, didStartNewGame: Bool)
 }
 
 class GameView: UIView {
@@ -61,8 +62,18 @@ class GameView: UIView {
     return progressView
   }()
   
+  var gameOverMainView = UIView()
+  
+  var gameOverView: GameOverView = {
+    let view = GameOverView(withBackgroundColor: .flatRed, autolayout: true)
+    view.layer.cornerRadius = 10.0
+    view.clipsToBounds = true
+    return view
+  }()
+  
   private var rightSwipe = UISwipeGestureRecognizer()
   private var leftSwipe = UISwipeGestureRecognizer()
+  private var tap = UITapGestureRecognizer()
   
   private var subviewArray = [UIView]()
   
@@ -123,6 +134,39 @@ class GameView: UIView {
         case leftSwipe: delegate?.gameView(self, wasSwipedInDirection: .left)
         default: break
       }
+    default:
+      break
+    }
+  }
+  
+  func presentGameOverView() {
+    
+    gameOverMainView = UIView(frame: UIScreen.main.bounds)
+    gameOverMainView.translatesAutoresizingMaskIntoConstraints = false
+    self.addSubview(gameOverMainView)
+    gameOverMainView.fillSuperview()
+    
+    let blurEffect = UIBlurEffect(style: .extraLight)
+    let visualEffectView = UIVisualEffectView(effect: blurEffect)
+    visualEffectView.translatesAutoresizingMaskIntoConstraints = false
+    gameOverMainView.addSubview(visualEffectView)
+    visualEffectView.fillSuperview()
+    
+    gameOverMainView.addSubview(gameOverView)
+    gameOverView.constrain(withSize: CGSize(width: 200, height: 200))
+    gameOverView.centerInSuperView()
+    
+    tap = UITapGestureRecognizer(target: self, action: #selector(handleGameOverTap(_:)))
+    self.addGestureRecognizer(tap)
+  }
+  
+  @objc private func handleGameOverTap(_ sender: UITapGestureRecognizer) {
+    switch sender.state {
+    case .ended:
+      self.removeGestureRecognizer(tap)
+      gameOverMainView.subviews.forEach { $0.removeFromSuperview() }
+      gameOverMainView.removeFromSuperview()
+      delegate?.gameView(self, didStartNewGame: true)
     default:
       break
     }
