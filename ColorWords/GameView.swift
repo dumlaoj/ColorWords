@@ -146,7 +146,7 @@ class GameView: UIView {
     self.addSubview(gameOverMainView)
     gameOverMainView.fillSuperview()
     
-    let blurEffect = UIBlurEffect(style: .extraLight)
+    let blurEffect = UIBlurEffect(style: .dark)
     let visualEffectView = UIVisualEffectView(effect: blurEffect)
     visualEffectView.translatesAutoresizingMaskIntoConstraints = false
     gameOverMainView.addSubview(visualEffectView)

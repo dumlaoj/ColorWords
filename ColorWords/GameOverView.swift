@@ -13,7 +13,8 @@ class GameOverView: UIView {
   var gameOverLabel: UILabel = {
     let label = UILabel(withBackgroundColor: .lightGray, autolayout: true)
     label.text = "GAME OVER"
-    label.font = UIFont.boldSystemFont(ofSize: 10)
+    label.font = UIFont.boldSystemFont(ofSize: 25)
+    label.adjustsFontSizeToFitWidth = true
     label.textAlignment = .center
     return label
   }()

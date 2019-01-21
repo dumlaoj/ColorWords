@@ -112,8 +112,7 @@ extension GameViewController {
 extension GameViewController {
   
   private func configureTimer() {
-    timer = Timer.scheduledTimer(withTimeInterval: 0.001, repeats: true, block: { [weak self] in
-      print($0.timeInterval)
+    timer = Timer.scheduledTimer(withTimeInterval: 0.001, repeats: true, block: { [weak self] _ in
       self?.percentTimeCompete -= CGFloat(0.001)
     })
   }
