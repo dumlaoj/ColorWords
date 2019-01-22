@@ -28,18 +28,17 @@ class GameView: UIView {
   }
   
   private var topContainerView: UIView = {
-    let view = UIView(withBackgroundColor: .white, autolayout: true)
+    let view = UIView(backgroundColor: .white)
     return view
   }()
   
   private var bottomContainerView: UIView = {
-    let view = UIView(withBackgroundColor: .white, autolayout: true)
+    let view = UIView(backgroundColor: .white)
     return view
   }()
   
   private var colorWordLabel: UILabel = {
-    let label = UILabel(withBackgroundColor: .clear, autolayout: true)
-    label.text = "COLOR"
+    let label = UILabel(backgroundColor: .clear, textLabel: "COLOR")
     label.textAlignment = .center
     label.textColor = .flatBlack
     label.font = UIFont.boldSystemFont(ofSize: 75)
@@ -48,7 +47,7 @@ class GameView: UIView {
   }()
   
   var pointsLabel: UILabel = {
-    let label = UILabel(withBackgroundColor: .clear, autolayout: true)
+    let label = UILabel(backgroundColor: .clear, textLabel: "00")
     label.text = "00"
     label.textColor = .black
     label.textAlignment = .center
@@ -56,18 +55,20 @@ class GameView: UIView {
   }()
   
   var timedProgressView: UIProgressView = {
-    let progressView = UIProgressView(withBackgroundColor: .lightGray, autolayout: true)
+    let progressView = UIProgressView(backgroundColor: .lightGray)
     progressView.setProgress(1, animated: false)
     progressView.clipsToBounds = true
     return progressView
   }()
   
-  var gameOverMainView = UIView()
   
-  var gameOverView: GameOverView = {
-    let view = GameOverView(withBackgroundColor: .flatRed, autolayout: true)
+  
+  var gameOverView: BlurredPopupView = {
+    let view = BlurredPopupView(backgroundColor: .clear)
+    view.text = "GAME OVER"
     view.layer.cornerRadius = 10.0
     view.clipsToBounds = true
+    view.containerViewBackgroundColor = .clear
     return view
   }()
   
@@ -110,10 +111,15 @@ class GameView: UIView {
     //TIMED PROGRESS VIEW
     let heightForProgressView: CGFloat = 20
     bottomContainerView.addSubview(timedProgressView)
-    timedProgressView.centerInSuperView()
+    timedProgressView.allignHorizontally(to: bottomContainerView, 0)
+    timedProgressView.allignVertically(to: bottomContainerView, -100)
     timedProgressView.widthAnchor.constraint(equalTo: bottomContainerView.widthAnchor, multiplier: 3/4, constant: 0).isActive = true
     timedProgressView.constrain(withHeight: heightForProgressView)
     timedProgressView.layer.cornerRadius = heightForProgressView / 2
+    
+    //GAME OVER VIEW
+    addSubview(gameOverView)
+    gameOverView.fillSuperview()
   }
   
   private func addSwipeGestures() {
@@ -130,9 +136,9 @@ class GameView: UIView {
     switch sender.state {
     case .ended:
       switch sender {
-        case rightSwipe: delegate?.gameView(self, wasSwipedInDirection: .right)
-        case leftSwipe: delegate?.gameView(self, wasSwipedInDirection: .left)
-        default: break
+      case rightSwipe: delegate?.gameView(self, wasSwipedInDirection: .right)
+      case leftSwipe: delegate?.gameView(self, wasSwipedInDirection: .left)
+      default: break
       }
     default:
       break
@@ -141,20 +147,7 @@ class GameView: UIView {
   
   func presentGameOverView() {
     
-    gameOverMainView = UIView(frame: UIScreen.main.bounds)
-    gameOverMainView.translatesAutoresizingMaskIntoConstraints = false
-    self.addSubview(gameOverMainView)
-    gameOverMainView.fillSuperview()
-    
-    let blurEffect = UIBlurEffect(style: .dark)
-    let visualEffectView = UIVisualEffectView(effect: blurEffect)
-    visualEffectView.translatesAutoresizingMaskIntoConstraints = false
-    gameOverMainView.addSubview(visualEffectView)
-    visualEffectView.fillSuperview()
-    
-    gameOverMainView.addSubview(gameOverView)
-    gameOverView.constrain(withSize: CGSize(width: 200, height: 200))
-    gameOverView.centerInSuperView()
+    gameOverView.animatePopup()
     
     tap = UITapGestureRecognizer(target: self, action: #selector(handleGameOverTap(_:)))
     self.addGestureRecognizer(tap)
@@ -164,8 +157,7 @@ class GameView: UIView {
     switch sender.state {
     case .ended:
       self.removeGestureRecognizer(tap)
-      gameOverMainView.subviews.forEach { $0.removeFromSuperview() }
-      gameOverMainView.removeFromSuperview()
+      gameOverView.removePopup()
       delegate?.gameView(self, didStartNewGame: true)
     default:
       break

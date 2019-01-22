@@ -15,9 +15,7 @@ class GameViewController: UIViewController {
   var colorWord: ColorWord = ColorWord() {
     didSet {
       gameView.colorWord = colorWord
-      print(colorWord.colorIndex)
-      print(colorWord.nameIndex)
-      print("\n")
+      gameView.timedProgressView.progressTintColor = colorWord.colorFromIndex.color
     }
   }
   
@@ -29,21 +27,23 @@ class GameViewController: UIViewController {
   
   //MARK: TIMER VARIABLES
   var timer: Timer = Timer()
-  let maxTime: CGFloat = 5
-  var percentTimeCompete: CGFloat = 5 {
+  let maxTime: CGFloat = 3
+  var timeLeft: CGFloat = 3 {
     didSet {
-      if percentTimeCompete == 5 {
-        gameView.timedProgressView.setProgress(1.0, animated: false)
+      if timeLeft == maxTime {
+        //gameView.timedProgressView.setProgress(Float(percentComplete), animated: false)
+        gameView.timedProgressView.progress = percentComplete
         return
-      }
-      gameView.timedProgressView.setProgress(Float(timeRemoved), animated: true)
-      if percentTimeCompete <= 0 {
+      } else if timeLeft < 0 {
         timer.invalidate()
-        print("timer stopped")
+        gameView.presentGameOverView()
+      } else {
+        gameView.timedProgressView.setProgress(Float(percentComplete), animated: true)
+        //print(gameView.timedProgressView.progress)
       }
     }
   }
-  var timeRemoved: CGFloat { return percentTimeCompete / maxTime }
+  var percentComplete: Float { return Float(timeLeft / maxTime) }
   
   /*
    CA Display Link
@@ -52,6 +52,7 @@ class GameViewController: UIViewController {
 //  let endValue = 100
 //  let displayLink = CADisplayLink(target: self, selector: #selector(updatePoints))
 //  displayLink.add(to: .main, forMode: .default)
+  
   private func startNewGame() {
     points = 0
     colorWord = ColorWord()
@@ -84,12 +85,12 @@ extension GameViewController: GameViewDelegate {
   func gameView(_ gameView: GameView, wasSwipedInDirection swipe: UISwipeGestureRecognizer.Direction) {
     switch swipe {
     case .right:
-      guard colorWord.isCorrect else { timer.invalidate(); print("GAME OVER"); gameView.presentGameOverView(); return }
+      guard colorWord.isCorrect else { timer.invalidate(); gameView.presentGameOverView(); return }
       points += 1
       colorWord = ColorWord()
       restartTimer()
     case .left:
-      guard !colorWord.isCorrect else { timer.invalidate(); print("GAME OVER"); gameView.presentGameOverView(); return }
+      guard !colorWord.isCorrect else { timer.invalidate(); gameView.presentGameOverView(); return }
       points += 1
       colorWord = ColorWord()
       restartTimer()
@@ -113,13 +114,13 @@ extension GameViewController {
   
   private func configureTimer() {
     timer = Timer.scheduledTimer(withTimeInterval: 0.001, repeats: true, block: { [weak self] _ in
-      self?.percentTimeCompete -= CGFloat(0.001)
+      self?.timeLeft -= CGFloat(0.001)
     })
   }
   
   private func restartTimer() {
     timer.invalidate()
-    percentTimeCompete = maxTime
+    timeLeft = maxTime
     configureTimer()
   }
 }

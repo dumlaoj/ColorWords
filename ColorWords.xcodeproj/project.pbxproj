@@ -7,21 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		172F86E621F63EC700F3A4F0 /* UIView+ConstraintExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172F86E521F63EC700F3A4F0 /* UIView+ConstraintExtensions.swift */; };
-		172F86E821F656B900F3A4F0 /* GameOverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172F86E721F656B900F3A4F0 /* GameOverView.swift */; };
 		173EF92321F3B61900CF4B32 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173EF92221F3B61900CF4B32 /* AppDelegate.swift */; };
 		173EF92A21F3B61C00CF4B32 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 173EF92921F3B61C00CF4B32 /* Assets.xcassets */; };
 		173EF92D21F3B61C00CF4B32 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 173EF92B21F3B61C00CF4B32 /* LaunchScreen.storyboard */; };
 		173EF93521F3B7CB00CF4B32 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173EF93421F3B7CB00CF4B32 /* GameViewController.swift */; };
 		175102FB21F3BBCA009DF3DD /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175102FA21F3BBCA009DF3DD /* GameView.swift */; };
+		17AE322421F79BF300A9B08D /* UIView+ConstraintExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AE322321F79BF300A9B08D /* UIView+ConstraintExtensions.swift */; };
 		17CA99B221F5623700654D9C /* ColorName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CA99B121F5623700654D9C /* ColorName.swift */; };
+		17D0272921F6E9E0004A4F5D /* BlurredPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D0272821F6E9DF004A4F5D /* BlurredPopupView.swift */; };
 		17D6522C21F41081002C314A /* ColorWordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D6522B21F41081002C314A /* ColorWordModel.swift */; };
 		7BCBEFC276EBE802AD197BFA /* Pods_ColorWords.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF4D4677B56A2FA280022CA8 /* Pods_ColorWords.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		172F86E521F63EC700F3A4F0 /* UIView+ConstraintExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+ConstraintExtensions.swift"; sourceTree = "<group>"; };
-		172F86E721F656B900F3A4F0 /* GameOverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverView.swift; sourceTree = "<group>"; };
 		173EF91F21F3B61800CF4B32 /* ColorWords.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ColorWords.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		173EF92221F3B61900CF4B32 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		173EF92921F3B61C00CF4B32 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -29,7 +27,9 @@
 		173EF92E21F3B61C00CF4B32 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		173EF93421F3B7CB00CF4B32 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		175102FA21F3BBCA009DF3DD /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
+		17AE322321F79BF300A9B08D /* UIView+ConstraintExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+ConstraintExtensions.swift"; sourceTree = "<group>"; };
 		17CA99B121F5623700654D9C /* ColorName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorName.swift; sourceTree = "<group>"; };
+		17D0272821F6E9DF004A4F5D /* BlurredPopupView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlurredPopupView.swift; sourceTree = "<group>"; };
 		17D6522B21F41081002C314A /* ColorWordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorWordModel.swift; sourceTree = "<group>"; };
 		D1AF1073288276C166E0451E /* Pods-ColorWords.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ColorWords.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ColorWords/Pods-ColorWords.debug.xcconfig"; sourceTree = "<group>"; };
 		DF4D4677B56A2FA280022CA8 /* Pods_ColorWords.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ColorWords.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -85,7 +85,7 @@
 				173EF92921F3B61C00CF4B32 /* Assets.xcassets */,
 				173EF92E21F3B61C00CF4B32 /* Info.plist */,
 				17CA99B121F5623700654D9C /* ColorName.swift */,
-				172F86E721F656B900F3A4F0 /* GameOverView.swift */,
+				17D0272821F6E9DF004A4F5D /* BlurredPopupView.swift */,
 			);
 			path = ColorWords;
 			sourceTree = "<group>";
@@ -95,7 +95,7 @@
 			children = (
 				173EF92221F3B61900CF4B32 /* AppDelegate.swift */,
 				173EF92B21F3B61C00CF4B32 /* LaunchScreen.storyboard */,
-				172F86E521F63EC700F3A4F0 /* UIView+ConstraintExtensions.swift */,
+				17AE322321F79BF300A9B08D /* UIView+ConstraintExtensions.swift */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -219,13 +219,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				172F86E821F656B900F3A4F0 /* GameOverView.swift in Sources */,
+				17D0272921F6E9E0004A4F5D /* BlurredPopupView.swift in Sources */,
 				17D6522C21F41081002C314A /* ColorWordModel.swift in Sources */,
 				173EF93521F3B7CB00CF4B32 /* GameViewController.swift in Sources */,
 				173EF92321F3B61900CF4B32 /* AppDelegate.swift in Sources */,
 				175102FB21F3BBCA009DF3DD /* GameView.swift in Sources */,
 				17CA99B221F5623700654D9C /* ColorName.swift in Sources */,
-				172F86E621F63EC700F3A4F0 /* UIView+ConstraintExtensions.swift in Sources */,
+				17AE322421F79BF300A9B08D /* UIView+ConstraintExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
