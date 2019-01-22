@@ -12,10 +12,11 @@ import ChameleonFramework
 class GameViewController: UIViewController {
 
   var gameView: GameView {  return view as! GameView }
-  var colorWord: ColorWord = ColorWord() {
+  var colorWord: ColorWord? {
     didSet {
+      guard let colorWord = self.colorWord else { return }
       gameView.colorWord = colorWord
-      gameView.timedProgressView.progressTintColor = colorWord.colorFromIndex.color
+      gameView.timedProgressView.progressTintColor = colorWord.color.color
     }
   }
   
@@ -66,7 +67,6 @@ extension GameViewController {
   override func loadView() {
     super.loadView()
     let gameView = GameView(frame: UIScreen.main.bounds)
-    gameView.colorWord = ColorWord()
     gameView.delegate = self
     view = gameView
   }
@@ -83,16 +83,17 @@ extension GameViewController: GameViewDelegate {
   }
   
   func gameView(_ gameView: GameView, wasSwipedInDirection swipe: UISwipeGestureRecognizer.Direction) {
+    guard let colorWord = self.colorWord else { return }
     switch swipe {
     case .right:
       guard colorWord.isCorrect else { timer.invalidate(); gameView.presentGameOverView(); return }
       points += 1
-      colorWord = ColorWord()
+      self.colorWord = ColorWord()
       restartTimer()
     case .left:
       guard !colorWord.isCorrect else { timer.invalidate(); gameView.presentGameOverView(); return }
       points += 1
-      colorWord = ColorWord()
+      self.colorWord = ColorWord()
       restartTimer()
     default: break
     }

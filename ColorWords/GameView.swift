@@ -23,7 +23,7 @@ class GameView: UIView {
     }
     set {
       colorWordLabel.text = newValue.name.rawValue.uppercased()
-      colorWordLabel.textColor = newValue.colorFromIndex.color
+      colorWordLabel.textColor = newValue.color.color
     }
   }
   
