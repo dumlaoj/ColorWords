@@ -18,7 +18,7 @@ enum ColorName: String, CaseIterable {
   
   var color: UIColor {
     switch self {
-    case .blue: return .flatBlue
+    case .blue: return .flatSkyBlue
     case .green: return .flatGreen
     case .red: return .flatRed
     case .yellow: return .flatYellow

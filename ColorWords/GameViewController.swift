@@ -15,8 +15,9 @@ class GameViewController: UIViewController {
   var colorWord: ColorWord? {
     didSet {
       guard let colorWord = self.colorWord else { return }
-      gameView.colorWord = colorWord
-      gameView.timedProgressView.progressTintColor = colorWord.color.color
+      gameView.colorWordLabel.text = colorWord.name.rawValue.uppercased()
+      gameView.colorWordLabel.textColor = colorWord.color.color
+      gameView.timedProgressView.trackTintColor = colorWord.color.color
     }
   }
   
@@ -26,54 +27,47 @@ class GameViewController: UIViewController {
     }
   }
   
-  //MARK: TIMER VARIABLES
-  var timer: Timer = Timer()
-  let maxTime: CGFloat = 3
-  //  var timeLeft: CGFloat = 3 {
-  //    didSet {
-  //      if timeLeft == maxTime {
-  //        //gameView.timedProgressView.setProgress(Float(percentComplete), animated: false)
-  //        gameView.timedProgressView.progress = percentComplete
-  //        return
-  //      } else if timeLeft < 0 {
-  //        timer.invalidate()
-  //        gameView.presentGameOverView()
-  //      } else {
-  //        gameView.timedProgressView.setProgress(Float(percentComplete), animated: true)
-  //        //print(gameView.timedProgressView.progress)
-  //      }
-  //    }
-  //  }
-  var timeLeft: CGFloat = 0 {
+  var resetFlag: Bool = true {
     didSet {
-      if timeLeft == 0 {
-        gameView.timedProgressView.progress = 0
-      } else if timeLeft > maxTime {
-        timer.invalidate()
-        print("invalidated")
-        //gameView.presentGameOverView()
-      } else {
-        gameView.timedProgressView.setProgress(Float(self.percentComplete), animated: true)
+      if resetFlag {
+        gameView.timedProgressView.setProgress(0, animated: false)
+        restartDisplayLink()
+        resetFlag.toggle()
       }
     }
   }
-  var percentComplete: Float { return Float(timeLeft / maxTime) }
+  
+  //MARK: TIMER VARIABLES
+  var elapsedTime: Float = 0 {
+    didSet {
+      if percentComplete >= 1 {
+        endGame()
+      } else {
+        gameView.timedProgressView.setProgress(percentComplete, animated: true)
+      }
+    }
+  }
+  let maxTime: Float = 3.0
+  var animationStartDate = Date()
+  var percentComplete: Float { return Float(elapsedTime / maxTime) }
   
   /*
    CA Display Link
    */
   //  var startValue = 0
   //  let endValue = 100
-  //  let displayLink = CADisplayLink(target: self, selector: #selector(updatePoints))
-  //  displayLink.add(to: .main, forMode: .default)
+  var displayLink: CADisplayLink?
   
   private func startNewGame() {
-    
     points = 0
     colorWord = ColorWord()
+    resetFlag = true
     
-    configureTimer()
-    //restartTimer()
+  }
+  
+  private func endGame() {
+    removeDisplayLink()
+    gameView.presentGameOverView()
   }
 }
 
@@ -90,6 +84,9 @@ extension GameViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     startNewGame()
+    
+    gameView.timedProgressView.transform = CGAffineTransform(scaleX: -1.0, y: 1.0);
+
   }
 }
 
@@ -102,19 +99,15 @@ extension GameViewController: GameViewDelegate {
     guard let colorWord = self.colorWord else { return }
     switch swipe {
     case .right:
-      guard colorWord.isCorrect else { timer.invalidate();
-        //gameView.presentGameOverView();
-        return }
+      guard colorWord.isCorrect else { endGame(); return }
       points += 1
       self.colorWord = ColorWord()
-      restartTimer()
+      resetFlag = true
     case .left:
-      guard !colorWord.isCorrect else { timer.invalidate();
-        //gameView.presentGameOverView();
-        return }
+      guard !colorWord.isCorrect else { endGame(); return }
       points += 1
       self.colorWord = ColorWord()
-      restartTimer()
+      resetFlag = true
     default: break
     }
   }
@@ -130,24 +123,29 @@ extension GameViewController {
   //  }
 }
 
-//MARK: TIMER
+//MARK: TIMER USING CADISPLAY LINK
 extension GameViewController {
   
-  private func configureTimer() {
-    timer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true, block: { [weak self] t in
-      //self?.timeLeft -= CGFloat(t.timeInterval)
-      self?.timeLeft += CGFloat(t.timeInterval)
-    })
+  func restartDisplayLink() {
+    removeDisplayLink()
+    addDisplayLink()
   }
   
-  private func restartTimer() {
-//    timer.invalidate()
-//    //timeLeft = maxTime
-//    configureTimer()
-//    timeLeft = 0
-//    //
-//    //    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300)) {
-//    //
-//    //    }
+  func addDisplayLink() {
+    animationStartDate = Date()
+    displayLink = CADisplayLink(target: self, selector: #selector(handleUpdate(displayLink:)))
+    displayLink?.add(to: .main, forMode: .default)
   }
+  
+  func removeDisplayLink() {
+    displayLink?.invalidate()
+    displayLink = nil
+  }
+  
+  @objc func handleUpdate(displayLink: CADisplayLink) {
+    let now = Date()
+    elapsedTime = Float(now.timeIntervalSince(animationStartDate))
+    
+  }
+  
 }

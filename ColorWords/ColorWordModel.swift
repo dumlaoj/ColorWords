@@ -18,8 +18,6 @@ struct ColorWord: Equatable {
   let color: ColorName
   
   var isCorrect: Bool { return name == color }
-  //var colorFromIndex: ColorName { return ColorName.allCases[self.color] }
-  //var name: ColorName { return ColorName.allCases[self.name] }
   
   init() {
     let count = ColorName.allCases.count
@@ -33,12 +31,11 @@ struct ColorWord: Equatable {
     let allCases = ColorName.allCases
     let count = allCases.count
     var array = [ColorName]()
-    for _ in 1 ... (count) {
+    for _ in 1 ... (count - 1) {
       array.append(colorName)
     }
     
     let combinedArray = allCases + array
-    //print("\(combinedArray) \n")
     let randomIndex = combinedArray.count.randomNumber
     let newColorName = combinedArray[randomIndex]
     return newColorName

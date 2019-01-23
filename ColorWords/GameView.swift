@@ -17,15 +17,6 @@ protocol GameViewDelegate: class {
 class GameView: UIView {
   
   weak var delegate: GameViewDelegate?
-  var colorWord: ColorWord {
-    get {
-      return ColorWord()
-    }
-    set {
-      colorWordLabel.text = newValue.name.rawValue.uppercased()
-      colorWordLabel.textColor = newValue.color.color
-    }
-  }
   
   private var topContainerView: UIView = {
     let view = UIView(backgroundColor: .white)
@@ -37,7 +28,7 @@ class GameView: UIView {
     return view
   }()
   
-  private var colorWordLabel: UILabel = {
+  var colorWordLabel: UILabel = {
     let label = UILabel(backgroundColor: .clear, textLabel: "COLOR")
     label.textAlignment = .center
     label.textColor = .flatBlack
@@ -55,9 +46,10 @@ class GameView: UIView {
   }()
   
   var timedProgressView: UIProgressView = {
-    let progressView = UIProgressView(backgroundColor: .lightGray)
+    let progressView = UIProgressView(backgroundColor: .white)
     progressView.setProgress(0, animated: false)
     progressView.clipsToBounds = true
+    progressView.progressTintColor = .white
     return progressView
   }()
   
