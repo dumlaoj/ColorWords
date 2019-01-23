@@ -10,7 +10,7 @@ import UIKit
 import ChameleonFramework
 
 class GameViewController: UIViewController {
-
+  
   var gameView: GameView {  return view as! GameView }
   var colorWord: ColorWord? {
     didSet {
@@ -29,18 +29,31 @@ class GameViewController: UIViewController {
   //MARK: TIMER VARIABLES
   var timer: Timer = Timer()
   let maxTime: CGFloat = 3
-  var timeLeft: CGFloat = 3 {
+  //  var timeLeft: CGFloat = 3 {
+  //    didSet {
+  //      if timeLeft == maxTime {
+  //        //gameView.timedProgressView.setProgress(Float(percentComplete), animated: false)
+  //        gameView.timedProgressView.progress = percentComplete
+  //        return
+  //      } else if timeLeft < 0 {
+  //        timer.invalidate()
+  //        gameView.presentGameOverView()
+  //      } else {
+  //        gameView.timedProgressView.setProgress(Float(percentComplete), animated: true)
+  //        //print(gameView.timedProgressView.progress)
+  //      }
+  //    }
+  //  }
+  var timeLeft: CGFloat = 0 {
     didSet {
-      if timeLeft == maxTime {
-        //gameView.timedProgressView.setProgress(Float(percentComplete), animated: false)
-        gameView.timedProgressView.progress = percentComplete
-        return
-      } else if timeLeft < 0 {
+      if timeLeft == 0 {
+        gameView.timedProgressView.progress = 0
+      } else if timeLeft > maxTime {
         timer.invalidate()
-        gameView.presentGameOverView()
+        print("invalidated")
+        //gameView.presentGameOverView()
       } else {
-        gameView.timedProgressView.setProgress(Float(percentComplete), animated: true)
-        //print(gameView.timedProgressView.progress)
+        gameView.timedProgressView.setProgress(Float(self.percentComplete), animated: true)
       }
     }
   }
@@ -49,15 +62,18 @@ class GameViewController: UIViewController {
   /*
    CA Display Link
    */
-//  var startValue = 0
-//  let endValue = 100
-//  let displayLink = CADisplayLink(target: self, selector: #selector(updatePoints))
-//  displayLink.add(to: .main, forMode: .default)
+  //  var startValue = 0
+  //  let endValue = 100
+  //  let displayLink = CADisplayLink(target: self, selector: #selector(updatePoints))
+  //  displayLink.add(to: .main, forMode: .default)
   
   private func startNewGame() {
+    
     points = 0
     colorWord = ColorWord()
-    restartTimer()
+    
+    configureTimer()
+    //restartTimer()
   }
 }
 
@@ -86,12 +102,16 @@ extension GameViewController: GameViewDelegate {
     guard let colorWord = self.colorWord else { return }
     switch swipe {
     case .right:
-      guard colorWord.isCorrect else { timer.invalidate(); gameView.presentGameOverView(); return }
+      guard colorWord.isCorrect else { timer.invalidate();
+        //gameView.presentGameOverView();
+        return }
       points += 1
       self.colorWord = ColorWord()
       restartTimer()
     case .left:
-      guard !colorWord.isCorrect else { timer.invalidate(); gameView.presentGameOverView(); return }
+      guard !colorWord.isCorrect else { timer.invalidate();
+        //gameView.presentGameOverView();
+        return }
       points += 1
       self.colorWord = ColorWord()
       restartTimer()
@@ -103,25 +123,31 @@ extension GameViewController: GameViewDelegate {
 
 //CA Display Link
 extension GameViewController {
-//
-//  @objc func updatePoints() {
-//    gameView.pointsLabel.text = "\(startValue)"
-//    startValue += 1
-//  }
+  //
+  //  @objc func updatePoints() {
+  //    gameView.pointsLabel.text = "\(startValue)"
+  //    startValue += 1
+  //  }
 }
 
 //MARK: TIMER
 extension GameViewController {
   
   private func configureTimer() {
-    timer = Timer.scheduledTimer(withTimeInterval: 0.001, repeats: true, block: { [weak self] _ in
-      self?.timeLeft -= CGFloat(0.001)
+    timer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true, block: { [weak self] t in
+      //self?.timeLeft -= CGFloat(t.timeInterval)
+      self?.timeLeft += CGFloat(t.timeInterval)
     })
   }
   
   private func restartTimer() {
-    timer.invalidate()
-    timeLeft = maxTime
-    configureTimer()
+//    timer.invalidate()
+//    //timeLeft = maxTime
+//    configureTimer()
+//    timeLeft = 0
+//    //
+//    //    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300)) {
+//    //
+//    //    }
   }
 }

@@ -38,7 +38,7 @@ struct ColorWord: Equatable {
     }
     
     let combinedArray = allCases + array
-    print("\(combinedArray) \n")
+    //print("\(combinedArray) \n")
     let randomIndex = combinedArray.count.randomNumber
     let newColorName = combinedArray[randomIndex]
     return newColorName

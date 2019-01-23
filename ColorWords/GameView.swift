@@ -56,7 +56,7 @@ class GameView: UIView {
   
   var timedProgressView: UIProgressView = {
     let progressView = UIProgressView(backgroundColor: .lightGray)
-    progressView.setProgress(1, animated: false)
+    progressView.setProgress(0, animated: false)
     progressView.clipsToBounds = true
     return progressView
   }()
