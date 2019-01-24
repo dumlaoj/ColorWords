@@ -69,7 +69,6 @@ class BlurredPopupView: UIView {
 	
 	convenience init(labelText: String, cornerRadius: CGFloat, blurStyle: UIBlurEffect.Style, backgroundColor: UIColor = .clear) {
 		self.init()
-		//DO SOMETHING
 		text = labelText
 		containerCornerRadius = cornerRadius
 		blurEffect = UIBlurEffect(style: blurStyle)
@@ -79,7 +78,6 @@ class BlurredPopupView: UIView {
 	required init?(coder aDecoder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 	
 	override func didMoveToSuperview() {
-		//render views here
 		self.fillSuperview()
 		animatePopup()
 	}
@@ -103,10 +101,6 @@ class BlurredPopupView: UIView {
 		//HIDE AND MINIMIZE CONTAINER VIEW
 		containerView.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
 		containerView.alpha = 0
-		
-		//RE-SHOW CONTAINER AND LABEL IF HIDDEN
-//		containerView.isHidden = false
-//		label.isHidden = false
 		
 		tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
 		
@@ -142,7 +136,6 @@ class BlurredPopupView: UIView {
 				if let completionBlock = self.completionOnTap {
 					completionBlock()
 				}
-				
 		})
 	}
 }

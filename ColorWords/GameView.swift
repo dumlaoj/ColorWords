@@ -9,15 +9,8 @@
 import UIKit
 import ChameleonFramework
 
-protocol GameViewDelegate: class {
-	func gameView(_ gameView: GameView, wasSwipedInDirection swipe: UISwipeGestureRecognizer.Direction)
-	func gameView(_ gameView: GameView, didStartNewGame: Bool)
-}
-
 class GameView: UIView {
-	
-	weak var delegate: GameViewDelegate?
-	
+		
 	private var topContainerView: UIView = {
 		let view = UIView(backgroundColor: .white)
 		return view
@@ -53,14 +46,6 @@ class GameView: UIView {
 		return progressView
 	}()
 	
-	
-	
-	var gameOverView = BlurredPopupView(labelText: "GAME OVER", cornerRadius: 10.0, blurStyle: .light)
-	
-	private var rightSwipe = UISwipeGestureRecognizer()
-	private var leftSwipe = UISwipeGestureRecognizer()
-	private var tap = UITapGestureRecognizer()
-	
 	private var subviewArray = [UIView]()
 	
 	override init(frame: CGRect) {
@@ -68,7 +53,6 @@ class GameView: UIView {
 		
 		subviewArray.append(contentsOf: [topContainerView, bottomContainerView, colorWordLabel])
 		renderViews()
-		addSwipeGestures()
 	}
 	
 	required init?(coder aDecoder: NSCoder) { fatalError("init(coder:) has not been implemented") }
@@ -83,7 +67,6 @@ class GameView: UIView {
 		bottomContainerView.constrain(withHeight: containerHeight)
 		bottomContainerView.constrain(toLeading: leadingAnchor, top: nil, trailing: trailingAnchor, bottom: bottomAnchor, withPadding: .zero)
 		
-		//addSubview(colorWordLabel)
 		colorWordLabel.allignVertically(to: self, 0)
 		colorWordLabel.constrain(toLeading: leadingAnchor, top: nil, trailing: trailingAnchor, bottom: nil, withPadding: UIEdgeInsets(top: 0, left: 30, bottom: 0, right: 30))
 		
@@ -101,41 +84,6 @@ class GameView: UIView {
 		timedProgressView.widthAnchor.constraint(equalTo: bottomContainerView.widthAnchor, multiplier: 3/4, constant: 0).isActive = true
 		timedProgressView.constrain(withHeight: heightForProgressView)
 		timedProgressView.layer.cornerRadius = heightForProgressView / 2
-	}
-	
-	private func addSwipeGestures() {
-		rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe(_:)))
-		rightSwipe.direction = .right
-		addGestureRecognizer(rightSwipe)
-		
-		leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe(_:)))
-		leftSwipe.direction = .left
-		addGestureRecognizer(leftSwipe)
-	}
-	
-	func presentGameOverView() {
-		removeGestureRecognizer(rightSwipe)
-		removeGestureRecognizer(leftSwipe)
-		gameOverView.completionOnTap = { [weak self] in
-			guard let self = self else { return }
-			self.addSwipeGestures()
-			self.delegate?.gameView(self, didStartNewGame: true)
-			self.gameOverView = BlurredPopupView(labelText: "GAME OVER", cornerRadius: 10.0, blurStyle: .light)
-		}
-		addSubview(gameOverView)
-	}
-	
-	@objc private func handleSwipe(_ sender: UISwipeGestureRecognizer) {
-		switch sender.state {
-		case .ended:
-			switch sender {
-			case rightSwipe: delegate?.gameView(self, wasSwipedInDirection: .right)
-			case leftSwipe: delegate?.gameView(self, wasSwipedInDirection: .left)
-			default: break
-			}
-		default:
-			break
-		}
 	}
 }
 

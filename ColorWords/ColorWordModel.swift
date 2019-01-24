@@ -16,7 +16,6 @@ struct ColorWord: Equatable {
   
   let name: ColorName
   let color: ColorName
-  
   var isCorrect: Bool { return name == color }
   
   init() {
@@ -34,13 +33,11 @@ struct ColorWord: Equatable {
     for _ in 1 ... (count - 1) {
       array.append(colorName)
     }
-    
     let combinedArray = allCases + array
     let randomIndex = combinedArray.count.randomNumber
     let newColorName = combinedArray[randomIndex]
     return newColorName
   }
-  
 }
 
 extension Int {

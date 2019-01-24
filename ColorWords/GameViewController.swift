@@ -14,10 +14,10 @@ class GameViewController: UIViewController {
 	var gameView: GameView {  return view as! GameView }
 	var colorWord: ColorWord? {
 		didSet {
-			guard let colorWord = self.colorWord else { return }
-			gameView.colorWordLabel.text = colorWord.name.rawValue.uppercased()
-			gameView.colorWordLabel.textColor = colorWord.color.color
-			gameView.timedProgressView.trackTintColor = colorWord.color.color
+			//guard let colorWord = self.colorWord else { return }
+			gameView.colorWordLabel.text = colorWord!.name.rawValue.uppercased()
+			gameView.colorWordLabel.textColor = colorWord!.color.color
+			gameView.timedProgressView.trackTintColor = colorWord!.color.color
 		}
 	}
 	
@@ -50,24 +50,29 @@ class GameViewController: UIViewController {
 	let maxTime: Float = 3.0
 	var animationStartDate = Date()
 	var percentComplete: Float { return Float(elapsedTime / maxTime) }
-	
-	/*
-	CA Display Link
-	*/
-	//  var startValue = 0
-	//  let endValue = 100
 	var displayLink: CADisplayLink?
 	
+	private var rightSwipe: UISwipeGestureRecognizer?
+	private var leftSwipe: UISwipeGestureRecognizer?
+	
+}
+
+//MARK: GAME STATE
+extension GameViewController {
 	private func startNewGame() {
 		points = 0
+		addSwipeGestures()
 		colorWord = ColorWord()
 		resetFlag = true
-		
 	}
 	
 	private func endGame() {
 		removeDisplayLink()
-		gameView.presentGameOverView()
+		gameView.removeGestureRecognizer(rightSwipe!)
+		gameView.removeGestureRecognizer(leftSwipe!)
+		print("GAME OVER")
+		//TODO: DISPLAY GAME OVER
+		presentGameOverView() 
 	}
 }
 
@@ -77,50 +82,33 @@ extension GameViewController {
 	override func loadView() {
 		super.loadView()
 		let gameView = GameView(frame: UIScreen.main.bounds)
-		gameView.delegate = self
 		view = gameView
 	}
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		startNewGame()
-		
 		gameView.timedProgressView.transform = CGAffineTransform(scaleX: -1.0, y: 1.0);
-		
-	}
-}
-
-extension GameViewController: GameViewDelegate {
-	func gameView(_ gameView: GameView, didStartNewGame: Bool) {
-		startNewGame()
 	}
 	
-	func gameView(_ gameView: GameView, wasSwipedInDirection swipe: UISwipeGestureRecognizer.Direction) {
+	private func wasSwiped(inDirection direction: UISwipeGestureRecognizer.Direction) {
 		guard let colorWord = self.colorWord else { return }
-		switch swipe {
+		switch direction {
 		case .right:
 			guard colorWord.isCorrect else { endGame(); return }
-			points += 1
-			self.colorWord = ColorWord()
-			resetFlag = true
+			updatePointsAndColorWord()
 		case .left:
 			guard !colorWord.isCorrect else { endGame(); return }
-			points += 1
-			self.colorWord = ColorWord()
-			resetFlag = true
+			updatePointsAndColorWord()
 		default: break
 		}
 	}
-}
-
-
-//CA Display Link
-extension GameViewController {
-	//
-	//  @objc func updatePoints() {
-	//    gameView.pointsLabel.text = "\(startValue)"
-	//    startValue += 1
-	//  }
+	
+	private func updatePointsAndColorWord() {
+		points += 1
+		self.colorWord = ColorWord()
+		resetFlag = true
+	}
 }
 
 //MARK: TIMER USING CADISPLAY LINK
@@ -146,11 +134,46 @@ extension GameViewController {
 	@objc func handleUpdate(displayLink: CADisplayLink) {
 		let now = Date()
 		elapsedTime = Float(now.timeIntervalSince(animationStartDate))
-		
 	}
-	
 }
 //GESTURES
 extension GameViewController {
+	private func addSwipeGestures() {
+		rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe(_:)))
+		rightSwipe!.direction = .right
+		gameView.addGestureRecognizer(rightSwipe!)
 	
+		leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe(_:)))
+		leftSwipe!.direction = .left
+		gameView.addGestureRecognizer(leftSwipe!)
+	}
+	
+	@objc private func handleSwipe(_ sender: UISwipeGestureRecognizer) {
+		switch sender.state {
+		case .ended:
+			switch sender {
+			case rightSwipe: wasSwiped(inDirection: .right)
+			case leftSwipe: wasSwiped(inDirection: .left)
+			default: break
+			}
+		default:
+			break
+		}
+	}
+	
+	func presentGameOverView() {
+		let goViewController = GameOverViewController()
+		goViewController.completion = {
+			goViewController.willMove(toParent: nil)
+			goViewController.removeFromParent()
+			goViewController.view.removeFromSuperview()
+			self.startNewGame()
+			print(self.children.count)
+		}
+		gameView.addSubview(goViewController.view)
+		addChild(goViewController)
+		print(children.count)
+		goViewController.didMove(toParent: self)
+		
+	}
 }
