@@ -10,7 +10,7 @@ import UIKit
 import ChameleonFramework
 
 class GameView: UIView {
-		
+	
 	private var topContainerView: UIView = {
 		let view = UIView(backgroundColor: .white)
 		return view

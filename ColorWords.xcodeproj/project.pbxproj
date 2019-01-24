@@ -86,7 +86,6 @@
 				1711EFCD21F97162008C14BE /* GameOverViewController.swift */,
 				17D6522B21F41081002C314A /* ColorWordModel.swift */,
 				17CA99B121F5623700654D9C /* ColorName.swift */,
-				178DEBDF21F94DB100B2CB6C /* BlurredPopupView.swift */,
 				173EF92E21F3B61C00CF4B32 /* Info.plist */,
 				173EF92921F3B61C00CF4B32 /* Assets.xcassets */,
 			);
@@ -98,6 +97,7 @@
 			children = (
 				173EF92221F3B61900CF4B32 /* AppDelegate.swift */,
 				173EF92B21F3B61C00CF4B32 /* LaunchScreen.storyboard */,
+				178DEBDF21F94DB100B2CB6C /* BlurredPopupView.swift */,
 				17AE322321F79BF300A9B08D /* UIView+ConstraintExtensions.swift */,
 			);
 			path = "Supporting Files";

@@ -12,9 +12,9 @@ import ChameleonFramework
 class GameViewController: UIViewController {
 	
 	var gameView: GameView {  return view as! GameView }
+	var previousColorWord: ColorWord?
 	var colorWord: ColorWord? {
 		didSet {
-			//guard let colorWord = self.colorWord else { return }
 			gameView.colorWordLabel.text = colorWord!.name.rawValue.uppercased()
 			gameView.colorWordLabel.textColor = colorWord!.color.color
 			gameView.timedProgressView.trackTintColor = colorWord!.color.color
@@ -24,6 +24,7 @@ class GameViewController: UIViewController {
 	var points: Int = 0 {
 		didSet {
 			gameView.pointsLabel.text = "\(points)"
+			speedUpTime()
 		}
 	}
 	
@@ -47,7 +48,7 @@ class GameViewController: UIViewController {
 			}
 		}
 	}
-	let maxTime: Float = 3.0
+	var maxTime: Float = 3.0
 	var animationStartDate = Date()
 	var percentComplete: Float { return Float(elapsedTime / maxTime) }
 	var displayLink: CADisplayLink?
@@ -70,9 +71,15 @@ extension GameViewController {
 		removeDisplayLink()
 		gameView.removeGestureRecognizer(rightSwipe!)
 		gameView.removeGestureRecognizer(leftSwipe!)
-		print("GAME OVER")
-		//TODO: DISPLAY GAME OVER
 		presentGameOverView() 
+	}
+	
+	private func speedUpTime() {
+		switch points {
+		case 05, 10, 15, 20, 25, 30, 35, 40, 45, 50:
+			maxTime = maxTime * 0.85
+		default: break
+		}
 	}
 }
 
@@ -106,36 +113,17 @@ extension GameViewController {
 	
 	private func updatePointsAndColorWord() {
 		points += 1
-		self.colorWord = ColorWord()
+		previousColorWord = ColorWord()
+		var newColorWord = ColorWord()
+		while newColorWord == previousColorWord {
+			print("colorWord is the same")
+			newColorWord = ColorWord()
+		}
+		colorWord = ColorWord()
 		resetFlag = true
 	}
 }
 
-//MARK: TIMER USING CADISPLAY LINK
-//MARK: CAN MAKE THIS OWN CONTROLLER
-extension GameViewController {
-	
-	func restartDisplayLink() {
-		removeDisplayLink()
-		addDisplayLink()
-	}
-	
-	func addDisplayLink() {
-		animationStartDate = Date()
-		displayLink = CADisplayLink(target: self, selector: #selector(handleUpdate(displayLink:)))
-		displayLink?.add(to: .main, forMode: .default)
-	}
-	
-	func removeDisplayLink() {
-		displayLink?.invalidate()
-		displayLink = nil
-	}
-	
-	@objc func handleUpdate(displayLink: CADisplayLink) {
-		let now = Date()
-		elapsedTime = Float(now.timeIntervalSince(animationStartDate))
-	}
-}
 //GESTURES
 extension GameViewController {
 	private func addSwipeGestures() {
@@ -168,12 +156,35 @@ extension GameViewController {
 			goViewController.removeFromParent()
 			goViewController.view.removeFromSuperview()
 			self.startNewGame()
-			print(self.children.count)
 		}
 		gameView.addSubview(goViewController.view)
 		addChild(goViewController)
-		print(children.count)
 		goViewController.didMove(toParent: self)
-		
+	}
+}
+
+//MARK: TIMER USING CADISPLAY LINK
+//MARK: CAN MAKE THIS OWN CONTROLLER
+extension GameViewController {
+	
+	func restartDisplayLink() {
+		removeDisplayLink()
+		addDisplayLink()
+	}
+	
+	func addDisplayLink() {
+		animationStartDate = Date()
+		displayLink = CADisplayLink(target: self, selector: #selector(handleUpdate(displayLink:)))
+		displayLink?.add(to: .main, forMode: .default)
+	}
+	
+	func removeDisplayLink() {
+		displayLink?.invalidate()
+		displayLink = nil
+	}
+	
+	@objc func handleUpdate(displayLink: CADisplayLink) {
+		let now = Date()
+		elapsedTime = Float(now.timeIntervalSince(animationStartDate))
 	}
 }

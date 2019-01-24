@@ -22,11 +22,10 @@ struct ColorWord: Equatable {
     let count = ColorName.allCases.count
     let colorName = ColorName.allCases[count.randomNumber]
     self.name = colorName
-    
-    self.color = ColorWord.createColorFrom(colorName)
+    self.color = ColorWord.generateColorFrom(colorName)
   }
   
-  static func createColorFrom(_ colorName: ColorName) -> ColorName{
+  static func generateColorFrom(_ colorName: ColorName) -> ColorName {
     let allCases = ColorName.allCases
     let count = allCases.count
     var array = [ColorName]()
