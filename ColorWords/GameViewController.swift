@@ -48,10 +48,12 @@ class GameViewController: UIViewController {
 			}
 		}
 	}
+	let initialMaxTime: Float = 3.0
 	var maxTime: Float = 3.0
 	var animationStartDate = Date()
 	var percentComplete: Float { return Float(elapsedTime / maxTime) }
 	var displayLink: CADisplayLink?
+	var timer = CADLTimer()
 	
 	private var rightSwipe: UISwipeGestureRecognizer?
 	private var leftSwipe: UISwipeGestureRecognizer?
@@ -62,6 +64,7 @@ class GameViewController: UIViewController {
 extension GameViewController {
 	private func startNewGame() {
 		points = 0
+		maxTime = initialMaxTime
 		addSwipeGestures()
 		colorWord = ColorWord()
 		resetFlag = true
@@ -96,6 +99,8 @@ extension GameViewController {
 		super.viewDidLoad()
 		startNewGame()
 		gameView.timedProgressView.transform = CGAffineTransform(scaleX: -1.0, y: 1.0);
+		
+		timer.delegate = self
 	}
 	
 	private func wasSwiped(inDirection direction: UISwipeGestureRecognizer.Direction) {
@@ -165,26 +170,31 @@ extension GameViewController {
 
 //MARK: TIMER USING CADISPLAY LINK
 //MARK: CAN MAKE THIS OWN CONTROLLER
-extension GameViewController {
-	
-	func restartDisplayLink() {
-		removeDisplayLink()
-		addDisplayLink()
+extension GameViewController: CADLTimerDelegate {
+
+	func cadltimer(_ cadltimer: CADLTimer, didUpdateWithTimerInterval timeInterval: TimeInterval) {
+		elapsedTime = Float(timeInterval)
 	}
-	
-	func addDisplayLink() {
-		animationStartDate = Date()
-		displayLink = CADisplayLink(target: self, selector: #selector(handleUpdate(displayLink:)))
-		displayLink?.add(to: .main, forMode: .default)
-	}
-	
-	func removeDisplayLink() {
-		displayLink?.invalidate()
-		displayLink = nil
-	}
-	
-	@objc func handleUpdate(displayLink: CADisplayLink) {
-		let now = Date()
-		elapsedTime = Float(now.timeIntervalSince(animationStartDate))
-	}
+//	
+//	
+//	func restartDisplayLink() {
+//		removeDisplayLink()
+//		addDisplayLink()
+//	}
+//	
+//	func addDisplayLink() {
+//		animationStartDate = Date()
+//		displayLink = CADisplayLink(target: self, selector: #selector(handleUpdate(displayLink:)))
+//		displayLink?.add(to: .main, forMode: .default)
+//	}
+//	
+//	func removeDisplayLink() {
+//		displayLink?.invalidate()
+//		displayLink = nil
+//	}
+//	
+//	@objc func handleUpdate(displayLink: CADisplayLink) {
+//		let now = Date()
+//		elapsedTime = Float(now.timeIntervalSince(animationStartDate))
+//	}
 }

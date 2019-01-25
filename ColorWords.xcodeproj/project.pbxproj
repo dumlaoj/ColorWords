@@ -15,6 +15,7 @@
 		175102FB21F3BBCA009DF3DD /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175102FA21F3BBCA009DF3DD /* GameView.swift */; };
 		178DEBE021F94DB100B2CB6C /* BlurredPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178DEBDF21F94DB100B2CB6C /* BlurredPopupView.swift */; };
 		17AE322421F79BF300A9B08D /* UIView+ConstraintExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AE322321F79BF300A9B08D /* UIView+ConstraintExtensions.swift */; };
+		17B42C4821FA8AE300F3EFD9 /* CADLTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B42C4721FA8AE300F3EFD9 /* CADLTimer.swift */; };
 		17CA99B221F5623700654D9C /* ColorName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CA99B121F5623700654D9C /* ColorName.swift */; };
 		17D6522C21F41081002C314A /* ColorWordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D6522B21F41081002C314A /* ColorWordModel.swift */; };
 		7BCBEFC276EBE802AD197BFA /* Pods_ColorWords.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF4D4677B56A2FA280022CA8 /* Pods_ColorWords.framework */; };
@@ -31,6 +32,7 @@
 		175102FA21F3BBCA009DF3DD /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		178DEBDF21F94DB100B2CB6C /* BlurredPopupView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlurredPopupView.swift; sourceTree = "<group>"; };
 		17AE322321F79BF300A9B08D /* UIView+ConstraintExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+ConstraintExtensions.swift"; sourceTree = "<group>"; };
+		17B42C4721FA8AE300F3EFD9 /* CADLTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CADLTimer.swift; sourceTree = "<group>"; };
 		17CA99B121F5623700654D9C /* ColorName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorName.swift; sourceTree = "<group>"; };
 		17D6522B21F41081002C314A /* ColorWordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorWordModel.swift; sourceTree = "<group>"; };
 		D1AF1073288276C166E0451E /* Pods-ColorWords.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ColorWords.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ColorWords/Pods-ColorWords.debug.xcconfig"; sourceTree = "<group>"; };
@@ -83,6 +85,7 @@
 				173EF93621F3B7DB00CF4B32 /* Supporting Files */,
 				175102FA21F3BBCA009DF3DD /* GameView.swift */,
 				173EF93421F3B7CB00CF4B32 /* GameViewController.swift */,
+				17B42C4721FA8AE300F3EFD9 /* CADLTimer.swift */,
 				1711EFCD21F97162008C14BE /* GameOverViewController.swift */,
 				17D6522B21F41081002C314A /* ColorWordModel.swift */,
 				17CA99B121F5623700654D9C /* ColorName.swift */,
@@ -226,6 +229,7 @@
 				173EF93521F3B7CB00CF4B32 /* GameViewController.swift in Sources */,
 				173EF92321F3B61900CF4B32 /* AppDelegate.swift in Sources */,
 				175102FB21F3BBCA009DF3DD /* GameView.swift in Sources */,
+				17B42C4821FA8AE300F3EFD9 /* CADLTimer.swift in Sources */,
 				1711EFCE21F97162008C14BE /* GameOverViewController.swift in Sources */,
 				17CA99B221F5623700654D9C /* ColorName.swift in Sources */,
 				17AE322421F79BF300A9B08D /* UIView+ConstraintExtensions.swift in Sources */,
