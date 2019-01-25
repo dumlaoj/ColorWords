@@ -16,6 +16,9 @@
 		178DEBE021F94DB100B2CB6C /* BlurredPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178DEBDF21F94DB100B2CB6C /* BlurredPopupView.swift */; };
 		17AE322421F79BF300A9B08D /* UIView+ConstraintExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AE322321F79BF300A9B08D /* UIView+ConstraintExtensions.swift */; };
 		17B42C4821FA8AE300F3EFD9 /* CADLTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B42C4721FA8AE300F3EFD9 /* CADLTimer.swift */; };
+		17B42C4A21FA9EAF00F3EFD9 /* MainMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B42C4921FA9EAF00F3EFD9 /* MainMenuViewController.swift */; };
+		17B42C4C21FA9EF300F3EFD9 /* MainMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B42C4B21FA9EF300F3EFD9 /* MainMenuView.swift */; };
+		17B7AE8721FBA6CE009148A1 /* Label+AnimationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B7AE8621FBA6CE009148A1 /* Label+AnimationExtensions.swift */; };
 		17CA99B221F5623700654D9C /* ColorName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CA99B121F5623700654D9C /* ColorName.swift */; };
 		17D6522C21F41081002C314A /* ColorWordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D6522B21F41081002C314A /* ColorWordModel.swift */; };
 		7BCBEFC276EBE802AD197BFA /* Pods_ColorWords.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF4D4677B56A2FA280022CA8 /* Pods_ColorWords.framework */; };
@@ -33,6 +36,9 @@
 		178DEBDF21F94DB100B2CB6C /* BlurredPopupView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlurredPopupView.swift; sourceTree = "<group>"; };
 		17AE322321F79BF300A9B08D /* UIView+ConstraintExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+ConstraintExtensions.swift"; sourceTree = "<group>"; };
 		17B42C4721FA8AE300F3EFD9 /* CADLTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CADLTimer.swift; sourceTree = "<group>"; };
+		17B42C4921FA9EAF00F3EFD9 /* MainMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuViewController.swift; sourceTree = "<group>"; };
+		17B42C4B21FA9EF300F3EFD9 /* MainMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuView.swift; sourceTree = "<group>"; };
+		17B7AE8621FBA6CE009148A1 /* Label+AnimationExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Label+AnimationExtensions.swift"; sourceTree = "<group>"; };
 		17CA99B121F5623700654D9C /* ColorName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorName.swift; sourceTree = "<group>"; };
 		17D6522B21F41081002C314A /* ColorWordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorWordModel.swift; sourceTree = "<group>"; };
 		D1AF1073288276C166E0451E /* Pods-ColorWords.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ColorWords.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ColorWords/Pods-ColorWords.debug.xcconfig"; sourceTree = "<group>"; };
@@ -88,6 +94,7 @@
 				1711EFCD21F97162008C14BE /* GameOverViewController.swift */,
 				17D6522B21F41081002C314A /* ColorWordModel.swift */,
 				17CA99B121F5623700654D9C /* ColorName.swift */,
+				17B42C4D21FA9EF600F3EFD9 /* Main Menu */,
 				173EF92E21F3B61C00CF4B32 /* Info.plist */,
 				173EF92921F3B61C00CF4B32 /* Assets.xcassets */,
 			);
@@ -102,8 +109,18 @@
 				178DEBDF21F94DB100B2CB6C /* BlurredPopupView.swift */,
 				17AE322321F79BF300A9B08D /* UIView+ConstraintExtensions.swift */,
 				17B42C4721FA8AE300F3EFD9 /* CADLTimer.swift */,
+				17B7AE8621FBA6CE009148A1 /* Label+AnimationExtensions.swift */,
 			);
 			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		17B42C4D21FA9EF600F3EFD9 /* Main Menu */ = {
+			isa = PBXGroup;
+			children = (
+				17B42C4921FA9EAF00F3EFD9 /* MainMenuViewController.swift */,
+				17B42C4B21FA9EF300F3EFD9 /* MainMenuView.swift */,
+			);
+			path = "Main Menu";
 			sourceTree = "<group>";
 		};
 		B0FB5F4C7000E1B32DBF876E /* Frameworks */ = {
@@ -226,12 +243,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				17D6522C21F41081002C314A /* ColorWordModel.swift in Sources */,
+				17B42C4C21FA9EF300F3EFD9 /* MainMenuView.swift in Sources */,
 				173EF93521F3B7CB00CF4B32 /* GameViewController.swift in Sources */,
 				173EF92321F3B61900CF4B32 /* AppDelegate.swift in Sources */,
 				175102FB21F3BBCA009DF3DD /* GameView.swift in Sources */,
 				17B42C4821FA8AE300F3EFD9 /* CADLTimer.swift in Sources */,
 				1711EFCE21F97162008C14BE /* GameOverViewController.swift in Sources */,
+				17B42C4A21FA9EAF00F3EFD9 /* MainMenuViewController.swift in Sources */,
 				17CA99B221F5623700654D9C /* ColorName.swift in Sources */,
+				17B7AE8721FBA6CE009148A1 /* Label+AnimationExtensions.swift in Sources */,
 				17AE322421F79BF300A9B08D /* UIView+ConstraintExtensions.swift in Sources */,
 				178DEBE021F94DB100B2CB6C /* BlurredPopupView.swift in Sources */,
 			);

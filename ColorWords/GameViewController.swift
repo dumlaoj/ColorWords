@@ -23,6 +23,7 @@ class GameViewController: UIViewController {
 	
 	var points: Int = 0 {
 		didSet {
+			gameView.pointsLabel.pulsate()
 			gameView.pointsLabel.text = "\(points)"
 			speedUpTime()
 		}
@@ -137,7 +138,6 @@ extension GameViewController {
 		if newColorWord != previousColor {
 			return newColorWord
 		} else {
-			print("in generate color word func recursion")
 			return self.generateNewColor(notTheSameAs: previousColor)
 		}
 	}

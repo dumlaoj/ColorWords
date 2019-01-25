@@ -26,7 +26,6 @@ class GameView: UIView {
 		label.textAlignment = .center
 		label.textColor = .flatBlack
 		label.font = UIFont.boldSystemFont(ofSize: 75)
-		label.adjustsFontSizeToFitWidth = true
 		return label
 	}()
 	
@@ -35,6 +34,7 @@ class GameView: UIView {
 		label.text = "00"
 		label.textColor = .black
 		label.textAlignment = .center
+		label.font = UIFont.systemFont(ofSize: 25, weight: .bold)
 		return label
 	}()
 	
