@@ -24,10 +24,6 @@ class CADLTimer {
 	private var startTime: Date?
 	private var timeIntervalSinceStart: TimeInterval?
 	
-	init() {
-		
-	}
-	
 	func startTimer() {
 		addDisplayLink()
 	}
@@ -58,29 +54,3 @@ class CADLTimer {
 		delegate?.cadltimer(self, didUpdateWithTimerInterval: timeIntervalSinceStart!)
 	}
 }
-//
-//
-//
-//extension GameViewController {
-//
-//	func restartDisplayLink() {
-//		removeDisplayLink()
-//		addDisplayLink()
-//	}
-//
-//	func addDisplayLink() {
-//		animationStartDate = Date()
-//		displayLink = CADisplayLink(target: self, selector: #selector(handleUpdate(displayLink:)))
-//		displayLink?.add(to: .main, forMode: .default)
-//	}
-//
-//	func removeDisplayLink() {
-//		displayLink?.invalidate()
-//		displayLink = nil
-//	}
-//
-//	@objc func handleUpdate(displayLink: CADisplayLink) {
-//		let now = Date()
-//		elapsedTime = Float(now.timeIntervalSince(animationStartDate))
-//	}
-//}

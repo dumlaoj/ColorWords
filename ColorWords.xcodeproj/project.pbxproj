@@ -85,7 +85,6 @@
 				173EF93621F3B7DB00CF4B32 /* Supporting Files */,
 				175102FA21F3BBCA009DF3DD /* GameView.swift */,
 				173EF93421F3B7CB00CF4B32 /* GameViewController.swift */,
-				17B42C4721FA8AE300F3EFD9 /* CADLTimer.swift */,
 				1711EFCD21F97162008C14BE /* GameOverViewController.swift */,
 				17D6522B21F41081002C314A /* ColorWordModel.swift */,
 				17CA99B121F5623700654D9C /* ColorName.swift */,
@@ -102,6 +101,7 @@
 				173EF92B21F3B61C00CF4B32 /* LaunchScreen.storyboard */,
 				178DEBDF21F94DB100B2CB6C /* BlurredPopupView.swift */,
 				17AE322321F79BF300A9B08D /* UIView+ConstraintExtensions.swift */,
+				17B42C4721FA8AE300F3EFD9 /* CADLTimer.swift */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";

@@ -121,14 +121,25 @@ extension GameViewController {
 	
 	private func updatePointsAndColorWord() {
 		points += 1
-		previousColorWord = ColorWord()
-		var newColorWord = ColorWord()
-		while newColorWord == previousColorWord {
-			print("colorWord is the same")
-			newColorWord = ColorWord()
-		}
-		colorWord = ColorWord()
+		previousColorWord = colorWord
+//		var newColorWord = ColorWord()
+//		while newColorWord == previousColorWord {
+//			print("colorWord is the same")
+//			newColorWord = ColorWord()
+//		}
+		colorWord = generateNewColor(notTheSameAs: previousColorWord!)
 		resetFlag = true
+	}
+	
+	func generateNewColor(notTheSameAs previousColor: ColorWord) -> ColorWord {
+		
+		let newColorWord = ColorWord()
+		if newColorWord != previousColor {
+			return newColorWord
+		} else {
+			print("in generate color word func recursion")
+			return self.generateNewColor(notTheSameAs: previousColor)
+		}
 	}
 }
 
