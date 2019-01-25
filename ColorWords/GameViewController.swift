@@ -32,7 +32,8 @@ class GameViewController: UIViewController {
 		didSet {
 			if resetFlag {
 				gameView.timedProgressView.setProgress(0, animated: false)
-				restartDisplayLink()
+				//restartDisplayLink()
+				timer.restartTimer()
 				resetFlag.toggle()
 			}
 		}
@@ -50,11 +51,12 @@ class GameViewController: UIViewController {
 	}
 	let initialMaxTime: Float = 3.0
 	var maxTime: Float = 3.0
-	var animationStartDate = Date()
 	var percentComplete: Float { return Float(elapsedTime / maxTime) }
-	var displayLink: CADisplayLink?
 	var timer = CADLTimer()
-	
+//
+//	var displayLink: CADisplayLink?
+//	var animationStartDate = Date()
+//
 	private var rightSwipe: UISwipeGestureRecognizer?
 	private var leftSwipe: UISwipeGestureRecognizer?
 	
@@ -71,7 +73,8 @@ extension GameViewController {
 	}
 	
 	private func endGame() {
-		removeDisplayLink()
+		//removeDisplayLink()
+		timer.stopTimer()
 		gameView.removeGestureRecognizer(rightSwipe!)
 		gameView.removeGestureRecognizer(leftSwipe!)
 		presentGameOverView() 
@@ -175,26 +178,28 @@ extension GameViewController: CADLTimerDelegate {
 	func cadltimer(_ cadltimer: CADLTimer, didUpdateWithTimerInterval timeInterval: TimeInterval) {
 		elapsedTime = Float(timeInterval)
 	}
-//	
-//	
+}
+
+
+//
+//
 //	func restartDisplayLink() {
 //		removeDisplayLink()
 //		addDisplayLink()
 //	}
-//	
+//
 //	func addDisplayLink() {
 //		animationStartDate = Date()
 //		displayLink = CADisplayLink(target: self, selector: #selector(handleUpdate(displayLink:)))
 //		displayLink?.add(to: .main, forMode: .default)
 //	}
-//	
+//
 //	func removeDisplayLink() {
 //		displayLink?.invalidate()
 //		displayLink = nil
 //	}
-//	
+//
 //	@objc func handleUpdate(displayLink: CADisplayLink) {
 //		let now = Date()
 //		elapsedTime = Float(now.timeIntervalSince(animationStartDate))
 //	}
-}
