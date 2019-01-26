@@ -29,11 +29,10 @@ class MainMenuView: UIView {
 	
 	private func renderViews() {
 		addSubview(button)
-		let buttonHeight: CGFloat = 200
+		let buttonHeight: CGFloat = 100
 		button.constrain(withSize: CGSize(width: buttonHeight, height: buttonHeight))
 		button.layer.cornerRadius = buttonHeight / 2
 		button.centerInSuperView()
-	
 		
 	}
 }

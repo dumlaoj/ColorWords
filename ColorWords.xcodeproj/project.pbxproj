@@ -13,6 +13,7 @@
 		173EF92D21F3B61C00CF4B32 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 173EF92B21F3B61C00CF4B32 /* LaunchScreen.storyboard */; };
 		173EF93521F3B7CB00CF4B32 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173EF93421F3B7CB00CF4B32 /* GameViewController.swift */; };
 		175102FB21F3BBCA009DF3DD /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175102FA21F3BBCA009DF3DD /* GameView.swift */; };
+		178D664321FBD6C7005F1847 /* CardMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178D664221FBD6C7005F1847 /* CardMenuViewController.swift */; };
 		178DEBE021F94DB100B2CB6C /* BlurredPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178DEBDF21F94DB100B2CB6C /* BlurredPopupView.swift */; };
 		17AE322421F79BF300A9B08D /* UIView+ConstraintExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AE322321F79BF300A9B08D /* UIView+ConstraintExtensions.swift */; };
 		17B42C4821FA8AE300F3EFD9 /* CADLTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B42C4721FA8AE300F3EFD9 /* CADLTimer.swift */; };
@@ -33,6 +34,7 @@
 		173EF92E21F3B61C00CF4B32 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		173EF93421F3B7CB00CF4B32 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		175102FA21F3BBCA009DF3DD /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
+		178D664221FBD6C7005F1847 /* CardMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardMenuViewController.swift; sourceTree = "<group>"; };
 		178DEBDF21F94DB100B2CB6C /* BlurredPopupView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlurredPopupView.swift; sourceTree = "<group>"; };
 		17AE322321F79BF300A9B08D /* UIView+ConstraintExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+ConstraintExtensions.swift"; sourceTree = "<group>"; };
 		17B42C4721FA8AE300F3EFD9 /* CADLTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CADLTimer.swift; sourceTree = "<group>"; };
@@ -119,6 +121,7 @@
 			children = (
 				17B42C4921FA9EAF00F3EFD9 /* MainMenuViewController.swift */,
 				17B42C4B21FA9EF300F3EFD9 /* MainMenuView.swift */,
+				178D664221FBD6C7005F1847 /* CardMenuViewController.swift */,
 			);
 			path = "Main Menu";
 			sourceTree = "<group>";
@@ -243,6 +246,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				17D6522C21F41081002C314A /* ColorWordModel.swift in Sources */,
+				178D664321FBD6C7005F1847 /* CardMenuViewController.swift in Sources */,
 				17B42C4C21FA9EF300F3EFD9 /* MainMenuView.swift in Sources */,
 				173EF93521F3B7CB00CF4B32 /* GameViewController.swift in Sources */,
 				173EF92321F3B61900CF4B32 /* AppDelegate.swift in Sources */,
