@@ -62,7 +62,11 @@ class MainMenuViewController: UIViewController {
 	}
 	
 	@objc private func handleTap(_ recognizer: UITapGestureRecognizer? = nil) {
-		animateTransitionIfNeeded(forState: nextState, duration: 1.0)
+		//animateTransitionIfNeeded(forState: nextState, duration: 1.0)
+		
+		// TRANSITION TO GAME VIEW CONTROLLER HERE
+		let gameVC = GameViewController()
+		navigationController?.pushViewController(gameVC, animated: true)
 	}
 	
 	@objc private func handlePan(_ recognizer: UIPanGestureRecognizer) {
