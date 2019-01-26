@@ -46,6 +46,16 @@ class GameView: UIView {
 		return progressView
 	}()
 	
+	var exitButton: UIButton = {
+		let button = UIButton()
+		button.setTitle("X", for: .normal)
+		button.backgroundColor = .flatWhite
+		button.setTitleColor(.lightGray, for: .normal)
+		button.layer.shadowColor = UIColor.darkGray.cgColor
+		button.layer.shadowOpacity = 0.5
+		return button
+	}()
+	
 	private var subviewArray = [UIView]()
 	
 	override init(frame: CGRect) {
@@ -84,6 +94,14 @@ class GameView: UIView {
 		timedProgressView.widthAnchor.constraint(equalTo: bottomContainerView.widthAnchor, multiplier: 3/4, constant: 0).isActive = true
 		timedProgressView.constrain(withHeight: heightForProgressView)
 		timedProgressView.layer.cornerRadius = heightForProgressView / 2
+		
+		//	EXIT BUTTON
+		topContainerView.addSubview(exitButton)
+		exitButton.constrain(toLeading: topContainerView.leadingAnchor, top: topContainerView.topAnchor, trailing: nil, bottom: nil, withPadding: UIEdgeInsets(top: 40, left: 12, bottom: 0, right: 0))
+		
+		exitButton.constrain(withSize: CGSize(width: 40, height: 40))
+		exitButton.clipsToBounds = true
+		exitButton.layer.cornerRadius = 40 / 2
 	}
 }
 

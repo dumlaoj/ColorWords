@@ -101,6 +101,8 @@ extension GameViewController {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		self.navigationController?.navigationBar.isHidden = true
+		configureExitButton()
 		startNewGame()
 		gameView.timedProgressView.transform = CGAffineTransform(scaleX: -1.0, y: 1.0);
 		
@@ -180,6 +182,16 @@ extension GameViewController {
 		addChild(goViewController)
 		goViewController.didMove(toParent: self)
 	}
+	
+	func configureExitButton() {
+		gameView.exitButton.addTarget(self, action: #selector(handleExitTapped(_:)), for: .touchUpInside)
+	}
+	
+	@objc func handleExitTapped(_ sender: UIButton) {
+		navigationController?.popViewController(animated: true)
+	}
+	
+	
 }
 
 //MARK: TIMER USING CADISPLAY LINK
