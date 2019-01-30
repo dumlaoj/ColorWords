@@ -12,3 +12,11 @@ Accumulate points until the user answers incorrectly.
 
 <img align="left" src="https://github.com/dumlaoj/ColorWords/blob/master/ColorWordsScreenshots/Playing2.png" width="320" height="568">
 <img align="right" src="https://github.com/dumlaoj/ColorWords/blob/master/ColorWordsScreenshots/GameOver.png" width="320" height="568">
+
+## Installation
+Download file and build and run in Xcode
+
+## Features
+More Features Coming Soon!
+
+
