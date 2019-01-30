@@ -7,5 +7,8 @@ Users can swipe right to indicate the two are matching, or left to indicate the 
 Accumulate points until the user answers incorrectly. 
 
 ## Screenshots
+<img align="left" src="https://github.com/dumlaoj/ColorWords/blob/master/ColorWordsScreenshots/Play.png" width="320" height="568">
+<img align="right" src="https://github.com/dumlaoj/ColorWords/blob/master/ColorWordsScreenshots/Playing.png" width="320" height="568">
 
-<img align="left" src="https://github.com/dumlaoj/ColorWords/blob/master/ColorWordsScreenshots/GameOver.png" width="320" height="568">
+<img align="left" src="https://github.com/dumlaoj/ColorWords/blob/master/ColorWordsScreenshots/Playing2.png" width="320" height="568">
+<img align="right" src="https://github.com/dumlaoj/ColorWords/blob/master/ColorWordsScreenshots/GameOver.png" width="320" height="568">
